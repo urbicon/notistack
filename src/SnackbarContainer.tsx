@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
-import { Theme, createMuiTheme as createTheme } from '@material-ui/core/styles';
+import { Theme, createTheme } from '@material-ui/core/styles';
 import { SNACKBAR_INDENTS } from './utils/constants';
 import { SnackbarProviderProps } from '.';
 

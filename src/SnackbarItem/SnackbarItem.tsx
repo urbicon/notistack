@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import { withStyles, WithStyles, createStyles } from '@material-ui/styles';
-import { Theme, emphasize, createMuiTheme as createTheme } from '@material-ui/core/styles';
+import { Theme, emphasize, createTheme } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
 import SnackbarContent from '../SnackbarContent';
 import { getTransitionDirection } from './SnackbarItem.util';

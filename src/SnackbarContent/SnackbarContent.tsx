@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 import { withStyles, WithStyles, createStyles } from '@material-ui/styles'
-import { Theme, createMuiTheme as createTheme } from '@material-ui/core/styles';
+import { Theme, createTheme } from '@material-ui/core/styles';
 import { SnackbarContentProps } from '../index';
 
 const styles = (theme: Theme) => createStyles({
