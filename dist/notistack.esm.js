@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import clsx from 'clsx';
 import Slide from '@material-ui/core/Slide';
 import { withStyles, createStyles, makeStyles } from '@material-ui/styles';
-import { createMuiTheme, emphasize } from '@material-ui/core/styles';
+import { createTheme, emphasize } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -46,7 +46,17 @@ function _extends() {
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
-  subClass.__proto__ = superClass;
+
+  _setPrototypeOf(subClass, superClass);
+}
+
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
 }
 
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -190,8 +200,10 @@ function objectMerge(options, props, defaults) {
     defaults = {};
   }
 
-  return _extends({}, defaults, {}, props, {}, options);
+  return _extends({}, defaults, props, options);
 }
+
+var _excluded = ["classes", "className"];
 
 var styles = function styles(theme) {
   var _root;
@@ -211,14 +223,14 @@ var styles = function styles(theme) {
 var SnackbarContent = /*#__PURE__*/forwardRef(function (_ref, ref) {
   var classes = _ref.classes,
       className = _ref.className,
-      props = _objectWithoutPropertiesLoose(_ref, ["classes", "className"]);
+      props = _objectWithoutPropertiesLoose(_ref, _excluded);
 
-  return React__default.createElement("div", Object.assign({
+  return /*#__PURE__*/React__default.createElement("div", Object.assign({
     ref: ref,
     className: clsx(classes.root, className)
   }, props));
 });
-var defaultTheme = /*#__PURE__*/createMuiTheme();
+var defaultTheme = /*#__PURE__*/createTheme();
 var SnackbarContent$1 = /*#__PURE__*/withStyles(styles, {
   defaultTheme: defaultTheme
 })(SnackbarContent);
@@ -238,25 +250,25 @@ var getTransitionDirection = function getTransitionDirection(anchorOrigin) {
 };
 
 var CheckIcon = function CheckIcon(props) {
-  return React__default.createElement(SvgIcon, Object.assign({}, props), React__default.createElement("path", {
+  return /*#__PURE__*/React__default.createElement(SvgIcon, Object.assign({}, props), /*#__PURE__*/React__default.createElement("path", {
     d: "M12 2C6.5 2 2 6.5 2 12S6.5 22 12 22 22 17.5 22 12 17.5 2 12 2M10 17L5 12L6.41\n        10.59L10 14.17L17.59 6.58L19 8L10 17Z"
   }));
 };
 
 var WarningIcon = function WarningIcon(props) {
-  return React__default.createElement(SvgIcon, Object.assign({}, props), React__default.createElement("path", {
+  return /*#__PURE__*/React__default.createElement(SvgIcon, Object.assign({}, props), /*#__PURE__*/React__default.createElement("path", {
     d: "M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z"
   }));
 };
 
 var ErrorIcon = function ErrorIcon(props) {
-  return React__default.createElement(SvgIcon, Object.assign({}, props), React__default.createElement("path", {
+  return /*#__PURE__*/React__default.createElement(SvgIcon, Object.assign({}, props), /*#__PURE__*/React__default.createElement("path", {
     d: "M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,\n        6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,\n        13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"
   }));
 };
 
 var InfoIcon = function InfoIcon(props) {
-  return React__default.createElement(SvgIcon, Object.assign({}, props), React__default.createElement("path", {
+  return /*#__PURE__*/React__default.createElement(SvgIcon, Object.assign({}, props), /*#__PURE__*/React__default.createElement("path", {
     d: "M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,\n        0 22,12A10,10 0 0,0 12,2Z"
   }));
 };
@@ -326,6 +338,7 @@ function useEventCallback(fn) {
   }, []);
 }
 
+var _excluded$1 = ["children", "autoHideDuration", "ClickAwayListenerProps", "disableWindowBlurListener", "onClose", "onMouseEnter", "onMouseLeave", "open", "resumeHideDuration"];
 var Snackbar = /*#__PURE__*/forwardRef(function (props, ref) {
   var children = props.children,
       autoHideDuration = props.autoHideDuration,
@@ -337,7 +350,7 @@ var Snackbar = /*#__PURE__*/forwardRef(function (props, ref) {
       onMouseLeave = props.onMouseLeave,
       open = props.open,
       resumeHideDuration = props.resumeHideDuration,
-      other = _objectWithoutPropertiesLoose(props, ["children", "autoHideDuration", "ClickAwayListenerProps", "disableWindowBlurListener", "onClose", "onMouseEnter", "onMouseLeave", "open", "resumeHideDuration"]);
+      other = _objectWithoutPropertiesLoose(props, _excluded$1);
 
   var timerAutoHide = useRef();
   var handleClose = useEventCallback(function () {
@@ -418,14 +431,18 @@ var Snackbar = /*#__PURE__*/forwardRef(function (props, ref) {
 
     return undefined;
   }, [disableWindowBlurListener, handleResume, open]);
-  return createElement(ClickAwayListener, _extends({
+  return /*#__PURE__*/createElement(ClickAwayListener, _extends({
     onClickAway: handleClickAway
-  }, ClickAwayListenerProps), createElement("div", _extends({
+  }, ClickAwayListenerProps), /*#__PURE__*/createElement("div", _extends({
     onMouseEnter: handleMouseEnter,
     onMouseLeave: handleMouseLeave,
     ref: ref
   }, other), children));
 });
+
+var _excluded$2 = ["classes"],
+    _excluded2 = ["style", "dense", "ariaAttributes", "className", "hideIconVariant", "iconVariant", "snack", "action", "content", "TransitionComponent", "TransitionProps", "transitionDuration", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting"],
+    _excluded3 = ["persist", "key", "open", "entered", "requestClose", "className", "variant", "content", "action", "ariaAttributes", "anchorOrigin", "message", "TransitionComponent", "TransitionProps", "transitionDuration", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting"];
 
 var styles$1 = function styles(theme) {
   // @ts-ignore
@@ -484,7 +501,7 @@ var styles$1 = function styles(theme) {
 
 var SnackbarItem = function SnackbarItem(_ref) {
   var classes = _ref.classes,
-      props = _objectWithoutPropertiesLoose(_ref, ["classes"]);
+      props = _objectWithoutPropertiesLoose(_ref, _excluded$2);
 
   var timeout = useRef();
 
@@ -524,7 +541,7 @@ var SnackbarItem = function SnackbarItem(_ref) {
       otherTranComponent = props.TransitionComponent,
       otherTranProps = props.TransitionProps,
       otherTranDuration = props.transitionDuration,
-      other = _objectWithoutPropertiesLoose(props, ["style", "dense", "ariaAttributes", "className", "hideIconVariant", "iconVariant", "snack", "action", "content", "TransitionComponent", "TransitionProps", "transitionDuration", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting"]);
+      other = _objectWithoutPropertiesLoose(props, _excluded2);
 
   var key = snack.key,
       open = snack.open,
@@ -538,9 +555,9 @@ var SnackbarItem = function SnackbarItem(_ref) {
       singleTranComponent = snack.TransitionComponent,
       singleTranProps = snack.TransitionProps,
       singleTranDuration = snack.transitionDuration,
-      singleSnackProps = _objectWithoutPropertiesLoose(snack, ["persist", "key", "open", "entered", "requestClose", "className", "variant", "content", "action", "ariaAttributes", "anchorOrigin", "message", "TransitionComponent", "TransitionProps", "transitionDuration", "onEnter", "onEntered", "onEntering", "onExit", "onExited", "onExiting"]);
+      singleSnackProps = _objectWithoutPropertiesLoose(snack, _excluded3);
 
-  var icon = _extends({}, defaultIconVariants, {}, iconVariant)[variant];
+  var icon = _extends({}, defaultIconVariants, iconVariant)[variant];
 
   var ariaAttributes = _extends({
     'aria-describedby': 'notistack-snackbar'
@@ -570,16 +587,16 @@ var SnackbarItem = function SnackbarItem(_ref) {
 
     return _extends({}, acc, (_extends2 = {}, _extends2[cbName] = createChainedFunction([props.snack[cbName], props[cbName]], props.snack.key), _extends2));
   }, {});
-  return React__default.createElement(Collapse, {
+  return /*#__PURE__*/React__default.createElement(Collapse, {
     unmountOnExit: true,
     timeout: 175,
     "in": collapsed,
     onExited: callbacks.onExited
-  }, React__default.createElement(Snackbar, Object.assign({}, other, singleSnackProps, {
+  }, /*#__PURE__*/React__default.createElement(Snackbar, Object.assign({}, other, singleSnackProps, {
     open: open,
     className: clsx(classes.root, classes.wrappedRoot, classes[transformer.toAnchorOrigin(anchorOrigin)]),
     onClose: handleClose
-  }), React__default.createElement(TransitionComponent, Object.assign({
+  }), /*#__PURE__*/React__default.createElement(TransitionComponent, Object.assign({
     appear: true,
     "in": open,
     timeout: transitionDuration
@@ -592,29 +609,30 @@ var SnackbarItem = function SnackbarItem(_ref) {
     // order matters. first callbacks.onEntered to set entered: true,
     // then handleEntered to check if there's a request for closing
     onEntered: createChainedFunction([callbacks.onEntered, handleEntered])
-  }), content || React__default.createElement(SnackbarContent$1, Object.assign({}, ariaAttributes, {
+  }), content || /*#__PURE__*/React__default.createElement(SnackbarContent$1, Object.assign({}, ariaAttributes, {
     role: "alert",
     style: style,
     className: clsx(classes.contentRoot, classes[transformer.toVariant(variant)], otherClassName, singleClassName, !hideIconVariant && icon && classes.lessPadding)
-  }), React__default.createElement("div", {
+  }), /*#__PURE__*/React__default.createElement("div", {
     id: ariaAttributes['aria-describedby'],
     className: classes.message
-  }, !hideIconVariant ? icon : null, snackMessage), action && React__default.createElement("div", {
+  }, !hideIconVariant ? icon : null, snackMessage), action && /*#__PURE__*/React__default.createElement("div", {
     className: classes.action
   }, action)))));
 };
 
-var defaultTheme$1 = /*#__PURE__*/createMuiTheme();
+var defaultTheme$1 = /*#__PURE__*/createTheme();
 var SnackbarItem$1 = /*#__PURE__*/withStyles(styles$1, {
   defaultTheme: defaultTheme$1
 })(SnackbarItem);
 
+var _excluded$3 = ["className", "anchorOrigin", "dense"];
 var collapse = {
   container: '& > .MuiCollapse-container',
   wrapper: '& > .MuiCollapse-container > .MuiCollapse-wrapper'
 };
 var xsWidthMargin = 16;
-var defaultTheme$2 = /*#__PURE__*/createMuiTheme();
+var defaultTheme$2 = /*#__PURE__*/createTheme();
 var useStyle = /*#__PURE__*/makeStyles(function (theme) {
   var _root, _rootDense, _left, _right, _center;
 
@@ -681,11 +699,11 @@ var SnackbarContainer = function SnackbarContainer(props) {
   var className = props.className,
       anchorOrigin = props.anchorOrigin,
       dense = props.dense,
-      other = _objectWithoutPropertiesLoose(props, ["className", "anchorOrigin", "dense"]);
+      other = _objectWithoutPropertiesLoose(props, _excluded$3);
 
   var combinedClassname = clsx(classes[anchorOrigin.vertical], classes[anchorOrigin.horizontal], classes.root, // root should come after others to override maxWidth
   className, dense && classes.rootDense);
-  return React__default.createElement("div", Object.assign({
+  return /*#__PURE__*/React__default.createElement("div", Object.assign({
     className: combinedClassname
   }, other));
 };
@@ -707,6 +725,9 @@ var warning = (function (message) {
   } catch (x) {}
 });
 
+var _excluded$4 = ["key", "preventDuplicate"],
+    _excluded2$1 = ["maxSnack", "preventDuplicate", "variant", "anchorOrigin", "iconVariant", "dense", "hideIconVariant", "domRoot", "children", "classes"];
+
 var SnackbarProvider = /*#__PURE__*/function (_Component) {
   _inheritsLoose(SnackbarProvider, _Component);
 
@@ -727,7 +748,7 @@ var SnackbarProvider = /*#__PURE__*/function (_Component) {
       var _opts = opts,
           key = _opts.key,
           preventDuplicate = _opts.preventDuplicate,
-          options = _objectWithoutPropertiesLoose(_opts, ["key", "preventDuplicate"]);
+          options = _objectWithoutPropertiesLoose(_opts, _excluded$4);
 
       var hasSpecifiedKey = isDefined(key);
       var id = hasSpecifiedKey ? key : new Date().getTime() + Math.random();
@@ -988,7 +1009,7 @@ var SnackbarProvider = /*#__PURE__*/function (_Component) {
         children = _this$props.children,
         _this$props$classes = _this$props.classes,
         classes = _this$props$classes === void 0 ? {} : _this$props$classes,
-        props = _objectWithoutPropertiesLoose(_this$props, ["maxSnack", "preventDuplicate", "variant", "anchorOrigin", "iconVariant", "dense", "hideIconVariant", "domRoot", "children", "classes"]);
+        props = _objectWithoutPropertiesLoose(_this$props, _excluded2$1);
 
     var categ = this.state.snacks.reduce(function (acc, current) {
       var _extends2;
@@ -999,13 +1020,13 @@ var SnackbarProvider = /*#__PURE__*/function (_Component) {
     }, {});
     var snackbars = Object.keys(categ).map(function (origin) {
       var snacks = categ[origin];
-      return React__default.createElement(SnackbarContainer$1, {
+      return /*#__PURE__*/React__default.createElement(SnackbarContainer$1, {
         key: origin,
         dense: dense,
         anchorOrigin: snacks[0].anchorOrigin,
         className: clsx(classes.containerRoot, classes[transformer.toContainerAnchorOrigin(origin)])
       }, snacks.map(function (snack) {
-        return React__default.createElement(SnackbarItem$1, Object.assign({}, props, {
+        return /*#__PURE__*/React__default.createElement(SnackbarItem$1, Object.assign({}, props, {
           key: snack.key,
           snack: snack,
           dense: dense,
@@ -1018,9 +1039,9 @@ var SnackbarProvider = /*#__PURE__*/function (_Component) {
         }));
       }));
     });
-    return React__default.createElement(SnackbarContext.Provider, {
+    return /*#__PURE__*/React__default.createElement(SnackbarContext.Provider, {
       value: contextValue
-    }, children, domRoot ? createPortal(snackbars, domRoot) : snackbars);
+    }, children, domRoot ? /*#__PURE__*/createPortal(snackbars, domRoot) : snackbars);
   };
 
   _createClass(SnackbarProvider, [{
@@ -1105,9 +1126,9 @@ var getDisplayName = (function (Component) {
 });
 
 var withSnackbar = function withSnackbar(Component) {
-  var WrappedComponent = React__default.forwardRef(function (props, ref) {
-    return React__default.createElement(SnackbarContext.Consumer, null, function (context) {
-      return React__default.createElement(Component, _extends({}, props, {
+  var WrappedComponent = /*#__PURE__*/React__default.forwardRef(function (props, ref) {
+    return /*#__PURE__*/React__default.createElement(SnackbarContext.Consumer, null, function (context) {
+      return /*#__PURE__*/React__default.createElement(Component, _extends({}, props, {
         ref: ref,
         enqueueSnackbar: context.enqueueSnackbar,
         closeSnackbar: context.closeSnackbar
