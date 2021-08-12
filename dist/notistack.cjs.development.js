@@ -635,8 +635,10 @@ var SnackbarItem$1 = /*#__PURE__*/styles$2.withStyles(styles$1, {
 
 var _excluded$3 = ["className", "anchorOrigin", "dense"];
 var collapse = {
-  container: '& > .MuiCollapse-container',
-  wrapper: '& > .MuiCollapse-container > .MuiCollapse-wrapper'
+  // Material-UI 4.12.x and above uses MuiCollapse-root; earlier versions use
+  // Mui-Collapse-container.  https://github.com/mui-org/material-ui/pull/24084
+  container: '& > .MuiCollapse-container, & > .MuiCollapse-root',
+  wrapper: '& > .MuiCollapse-container > .MuiCollapse-wrapper, & > .MuiCollapse-root > .MuiCollapse-wrapper'
 };
 var xsWidthMargin = 16;
 var defaultTheme$2 = /*#__PURE__*/styles$3.createTheme();
@@ -653,7 +655,7 @@ var useStyle = /*#__PURE__*/styles$2.makeStyles(function (theme) {
       height: 'auto',
       width: 'auto',
       transition: 'top 300ms ease 0ms, right 300ms ease 0ms, bottom 300ms ease 0ms, left 300ms ease 0ms, margin 300ms ease 0ms, max-width 300ms ease 0ms',
-      // container itself is invisible and should not block clicks, clicks should be passed to its children 
+      // container itself is invisible and should not block clicks, clicks should be passed to its children
       pointerEvents: 'none'
     }, _root[collapse.container] = {
       pointerEvents: 'all'
